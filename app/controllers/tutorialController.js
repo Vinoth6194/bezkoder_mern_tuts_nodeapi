@@ -2,6 +2,7 @@ const express = require("express");
 const router = express.Router();
 
 var { Tutorial } = require("../models/tutorial");
+var ObjectID = require("mongoose").Types.ObjectId;
 
 //*GET api
 router.get("/", (req, res) => {
@@ -31,5 +32,26 @@ router.post("/", (req, res) => {
   });
 });
 
-//*Retrieve the date by searching title
+router.put("/:id", (req, res) => {
+  if (!ObjectID.isValid(req.params.id))
+    return res.status(400).send("No record with given id : " + req.params.id);
+
+  var updatedRecord = {
+    title: req.body.title,
+    description: req.body.description,
+    published: req.body.published ? req.body.published : false,
+  };
+  Tutorial.findByIdAndUpdate(
+    req.params.id,
+    { $set: updatedRecord },
+    { new: true },
+    (err, docs) => {
+      if (!err) res.send(docs);
+      else
+        console.log(
+          "Error while updating a record : " + JSON.stringify(err, undefined, 2)
+        );
+    }
+  );
+});
 module.exports = router;
