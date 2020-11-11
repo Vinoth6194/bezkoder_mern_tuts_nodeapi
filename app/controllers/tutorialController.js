@@ -54,4 +54,18 @@ router.put("/:id", (req, res) => {
     }
   );
 });
+
+//*DELETE api
+router.delete("/:id", (req, res) => {
+  if (!ObjectID.isValid(req.params.id))
+    return res.status(400).send("No record with given id : " + req.params.id);
+
+  Tutorial.findByIdAndRemove(req.params.id, (err, docs) => {
+    if (!err) res.send(docs);
+    else
+      console.log(
+        "Error while deleting a record : " + JSON.stringify(err, undefined, 2)
+      );
+  });
+});
 module.exports = router;
