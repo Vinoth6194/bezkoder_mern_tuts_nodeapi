@@ -6,7 +6,7 @@ var Tutorial = mongoose.model(
     description: String,
     published: Boolean,
   },
-  { timestamps: true },
+  //   { timestamps: true },
   "tutorials"
 );
 module.exports = { Tutorial };
