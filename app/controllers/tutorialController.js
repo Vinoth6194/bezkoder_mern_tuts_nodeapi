@@ -13,6 +13,7 @@ router.get("/", (req, res) => {
     }
   });
 });
+//*POST api
 router.post("/", (req, res) => {
   var newRecord = new Tutorial({
     title: req.body.title,
@@ -29,4 +30,6 @@ router.post("/", (req, res) => {
     }
   });
 });
+
+//*Retrieve the date by searching title
 module.exports = router;
