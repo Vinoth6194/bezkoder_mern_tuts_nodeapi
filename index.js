@@ -1,6 +1,8 @@
 const bodyParser = require("body-parser");
 const express = require("express");
 const app = express();
+require("./db");
+
 app.use((req, res, next) => {
   res.send("VinServer for Bezkoder Tuts Tracker running at 8080");
 
